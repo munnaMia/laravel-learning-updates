@@ -20,9 +20,9 @@
 
     <div>
         <ul>
-            @if (count($idea))
+            @if ($idea->count())
                 @foreach ($idea as $id)
-                    <li>{{ $id }}</li>
+                    <li>{{ $id->Description }}</li>
                 @endforeach
             @endif
 

@@ -1,12 +1,15 @@
 <?php
 
+use App\Models\Idea;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $idea = session()->get('ideas');
+    // $ideas = DB::table('ideas')->get();
+    $ideas = Idea::where('state', 'pending')->get();
 
     return view('ideas', [
-        'idea' => $idea
+        'idea' => $ideas
     ]);
 });
 
@@ -14,7 +17,10 @@ Route::get('/', function () {
 Route::post('/ideas', function () {
     $idea = request('idea');
 
-    session()->push('ideas', $idea);
+    Idea::create([
+        'description' => $idea,
+        'state' => 'pending'
+    ]);
 
     return redirect('/');
 });
