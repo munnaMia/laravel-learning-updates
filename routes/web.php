@@ -12,12 +12,9 @@ Route::get('/ideas', function () {
     ]);
 });
 
-Route::get('/ideas/{id}', function ($id) {
-    // $ideas = DB::table('ideas')->get();
-    $ideas = Idea::find($id);
-
+Route::get('/ideas/{idea}', function (Idea $idea) {
     return view('ideas.show', [
-        'idea' => $ideas
+        'idea' => $idea
     ]);
 });
 
@@ -34,6 +31,6 @@ Route::post('/ideas', function () {
 
 
 Route::get('/delete_ideas', function () {
-    Idea::truncate(); 
+    Idea::truncate();
     return redirect('/ideas');
 });
