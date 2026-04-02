@@ -6,7 +6,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // $ideas = DB::table('ideas')->get();
-    $ideas = Idea::where('state', 'pending')->get();
+    $ideas = Idea::query()
+        ->when(
+            request('state'),
+            function ($query, $state) {
+                $query->where('state', $state);
+            }
+        )->get();
 
     return view('ideas', [
         'idea' => $ideas
