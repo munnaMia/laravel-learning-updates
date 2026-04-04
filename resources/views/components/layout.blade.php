@@ -14,12 +14,9 @@
 
 <body class="bg-gray-800 p-7">
 
-    <nav>
-        <a href="/">home page</a>
-        <a href="/about">about page</a>
-        <a href="/contact">contact page</a>
-    </nav>
-
+   
+    <x-nav>
+        
     <main>
         {{ $slot }}
     </main>
