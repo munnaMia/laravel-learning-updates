@@ -15,10 +15,11 @@ class IdeaContorller extends Controller
      */
     public function index()
     {
-        // $ideas = DB::table('ideas')->get();
-        $ideas = Idea::query()->where([
-            'user_id' => Auth::id()
-        ])->get();
+        // // $ideas = DB::table('ideas')->get();
+        // $ideas = Idea::query()->where([
+        //     'user_id' => Auth::id()
+        // ])->get();
+        $ideas = Auth::user()->ideas;
 
         return view('ideas/index', [
             'idea' => $ideas
@@ -43,10 +44,15 @@ class IdeaContorller extends Controller
         //     'description' => ['required', 'min:10']
         // ]);
 
-        Idea::create([
+        // Idea::create([
+        //     'description' =>  request('idea'),
+        //     'state' => 'pending',
+        //     'user_id' => Auth::user()
+        // ]);
+
+        Auth::user()->ideas()->create([
             'description' =>  request('idea'),
             'state' => 'pending',
-            'user_id' => Auth::user()
         ]);
 
         return redirect('/ideas');
