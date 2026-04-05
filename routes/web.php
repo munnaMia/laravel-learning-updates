@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\IdeaContorller;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -25,3 +26,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionController::class, 'create'])->name('/login');
     Route::post('/login', [SessionController::class, 'store']);
 });
+
+
+Route::get('/admin', function () {
+    // Gate::authorize('view-admin'); // cloure based
+    return 'admin panel';
+})->can('view-admin');
