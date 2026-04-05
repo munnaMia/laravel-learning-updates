@@ -27,8 +27,3 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionController::class, 'store']);
 });
 
-
-Route::get('/admin', function () {
-    // Gate::authorize('view-admin'); // cloure based
-    return 'admin panel';
-})->can('view-admin');
